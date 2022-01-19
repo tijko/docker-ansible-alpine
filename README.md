@@ -23,7 +23,7 @@ strategy = mitogen_linear
 
 ### Run Playbook
 
-```
+```sh
 docker run -it --rm \
   -v ${PWD}:/ansible \
   pad92/ansible-alpine:latest \
@@ -32,7 +32,7 @@ docker run -it --rm \
 
 ### Generate Base Role structure
 
-```
+```sh
 docker run -it --rm \
   -v ${PWD}:/ansible \
   pad92/ansible-alpine:latest \
@@ -41,17 +41,29 @@ docker run -it --rm \
 
 ### Lint Role
 
-```
+```sh
 docker run -it --rm pad92/ansible-alpine:latest \
   -v ${PWD}:/ansible ansible-playbook tests/playbook.yml --syntax-check
 ```
 ### Run with forwarding ssh agent
 
-```
+```sh
 docker run -it --rm \
   -v $(readlink -f $SSH_AUTH_SOCK):/ssh-agent \
   -v ${PWD}:/ansible \
   -e SSH_AUTH_SOCK=/ssh-agent \
   pad92/ansible-alpine:latest \
   sh
+```
+
+### add custom certifitates
+
+```sh
+docker run -it --rm \
+  -v $(readlink -f $SSH_AUTH_SOCK):/ssh-agent \
+  -v ${PWD}:/ansible \
+  -v ${PWD}/certs/int.pem:/usr/local/share/ca-certificates/int.pem
+  -v ${PWD}/certs/root.pem:/usr/local/share/ca-certificates/root.pem
+  -e SSH_AUTH_SOCK=/ssh-agent \
+  pad92/ansible-alpine:2.10.7-1 sh
 ```
