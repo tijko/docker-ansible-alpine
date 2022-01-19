@@ -65,7 +65,7 @@ fi
 export REQUESTS_CA_BUNDLE="${REQUESTS_CA_BUNDLE}"
 
 # update ca-certs
-if [ "$(find -type f /usr/local/share/ca-certificates/ 2>/dev/null | wc -l)" -gt "0" ]; then
+if [ "$(find -type f -name '*.crt' /usr/local/share/ca-certificates/ 2>/dev/null | wc -l)" -gt "0" ]; then
   update-ca-certificates
 fi
 
