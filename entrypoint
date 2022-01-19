@@ -58,7 +58,7 @@ if [ -z "${REQUESTS_CA_BUNDLE}" ]; then
   REQUESTS_CA_BUNDLE='/etc/ssl/certs/ca-certificates.crt'
 fi
 
-if [ -n "${REQUESTS_CA_BUNDLE}" ]; then
+if [ "$(find -type f /usr/local/share/ca-certificates/ 2>/dev/null | wc -l)" -gt "0" ]; then
   update-ca-certificates
   export REQUESTS_CA_BUNDLE="${REQUESTS_CA_BUNDLE}"
 fi
