@@ -55,7 +55,7 @@ fi
 
 # upgrade ca-certificates package
 if [ "x${CA_CERT_UPGRADE}" == "xtrue" ]; then
-  apk add --no-cache ca-certificates
+  apk add --upgrade --no-cache ca-certificates
 fi
 
 # export REQUESTS_CA_BUNDLE
